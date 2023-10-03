@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+import Game from './Components/Game';
+import Login from './Components/Login';
+
 
 function App() {
+  const [userName, setUserName] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
+  const handleLogin = (user) => {
+    setUserName(user);
+    setLoggedIn(true);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {loggedIn ? (
+        <Game userName={userName}/>
+      ): (
+        <Login onLogin={handleLogin}/>
+       )}
     </div>
   );
 }
